@@ -1,0 +1,65 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <h1>Sign Up</h1>
+    <form method="POST" action="">
+      <div class="form-item">
+        <label for="firstname">First Name</label>
+        <input
+          type="text"
+          name="firstname"
+          id="firstname"
+          placeholder="First Name"
+          required
+        />
+      </div>
+      <div class="form-item">
+        <label for="lastname">Last Name</label>
+        <input
+          type="text"
+          name="lastname"
+          id="lastname"
+          placeholder="Last Name"
+          required
+        />
+      </div>
+      <div class="form-item">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="Username"
+          required
+        />
+      </div>
+      <div class="form-item">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required />
+      </div>
+      <div class="form-item">
+        <label for="passwordconf">Confirm Password</label>
+        <input type="password" name="passwordconf" id="passwordconf" required />
+      </div>
+      <div class="form-item">
+        <label for="secretpassword">Secret Password</label>
+        <input type="password" name="secretpassword" id="secretpassword" />
+      </div>
+      <div class="form-item">
+        <button>Sign Up</button>
+      </div>
+      <div class="error-div">
+        <ul class="error-list">
+          {{#each errors}}
+            <li>{{this.msg}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </form>
+  </body>
+</html>
