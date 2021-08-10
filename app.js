@@ -9,11 +9,10 @@ const passport = require("passport");
 const session = require("express-session");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
+const User = require("./models/user");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-
-var app = express();
 
 // Mongoose setup
 const mongoose = require("mongoose");
@@ -22,9 +21,59 @@ mongoose.connect(dbLink, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB Connection Error"));
 
+var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
+
+//Passport
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    //    console.log("hey");
+    //   console.log(password);
+    try {
+      console.log("hey");
+      const user = await User.findOne({ username: username });
+      if (!user) {
+        return done(null, false, { message: "Incorrect username" });
+      }
+      //compare hashes with bcrypt compare
+      try {
+        const result = await bcrypt.compare(password, user.password);
+        if (result) {
+          return done(null, user);
+        } else {
+          return done(null, false, { message: "Incorrect password" });
+        }
+      } catch (err) {
+        return done(err);
+      }
+    } catch (err) {
+      return done(err);
+    }
+  })
+);
+
+//sessions and serialization (cookies)
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => done(err, user));
+});
+
+//middlewares
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+//passport middlewares
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.urlencoded({ extended: false }));
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -34,6 +83,13 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.post(
+  "/sign-in",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+  })
+);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

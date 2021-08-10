@@ -36,16 +36,12 @@ exports.signup_post = [
     if (!errors.isEmpty()) {
       res.render("sign-up-form", { title: "Sign Up", errors: errors.array() });
     } else {
-      //Validate password (TODO)
-
       // All good - proceed with creation of new user
       const is_member =
         req.body.secretpassword === process.env.SECRET_PASSWORD ? true : false;
-      console.log(is_member);
       bcrypt
         .hash(req.body.password, 10)
         .then((hashedPassword) => {
-          console.log("here");
           const newUser = new User({
             first_name: req.body.firstname,
             last_name: req.body.lastname,
