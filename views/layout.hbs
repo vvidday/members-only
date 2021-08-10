@@ -1,10 +1,18 @@
-<!DOCTYPE html>
 <html>
   <head>
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
+    <nav>
+      {{#if currentUser}}
+        <a href="/profile">Profile</a>
+        <a href="/logout">Log Out</a>
+      {{else}}
+        <a href="/sign-in">Sign In</a>
+        <a href="/sign-up">Sign Up</a>
+      {{/if}}
+    </nav>
     {{{body}}}
   </body>
 </html>

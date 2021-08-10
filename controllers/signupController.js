@@ -4,8 +4,8 @@ const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
 exports.signup_get = (req, res) => {
-  // req.locals?
-  res.render("sign-up-form", { title: "Sign Up" });
+  if (res.locals.currentUser) res.redirect("/");
+  else res.render("sign-up-form", { title: "Sign Up" });
 };
 
 exports.signup_post = [
