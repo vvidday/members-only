@@ -4,15 +4,12 @@ var router = express.Router();
 const signup_controller = require("../controllers/signupController");
 const signin_controller = require("../controllers/signinController");
 const profile_controller = require("../controllers/profileController");
+const index_controller = require("../controllers/indexController");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", {
-    title: res.locals.currentUser
-      ? res.locals.currentUser.username
-      : "placeholder",
-  });
-});
+router.get("/", index_controller.index_get);
+
+router.post("/new-message", index_controller.new_message_post);
 
 router.get("/sign-up", signup_controller.signup_get);
 

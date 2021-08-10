@@ -1,0 +1,22 @@
+<h1>Welcome to Members Only!</h1>
+<div class="message-board">
+  {{#each messages}}
+    <div class="message">
+      <div class="message-title">
+        {{this.title}}
+      </div>
+      <div class="message-content">
+        <a href="/sign-up">Register</a>
+        or
+        <a href="/sign-in">Sign In</a>
+        to view the contents of this message.
+      </div>
+      <div class="message-timestamp">
+        {{this.timestamp}}
+      </div>
+      <div class="message-author">
+        Posted by: Anonymous
+      </div>
+    </div>
+  {{/each}}
+</div>
