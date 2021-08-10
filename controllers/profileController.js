@@ -15,7 +15,6 @@ exports.membership_post = async (req, res, next) => {
         { is_member: true }
       )
         .then((user) => {
-          console.log(user);
           res.redirect("/profile");
         })
         .catch((err) => next(err));
@@ -24,5 +23,20 @@ exports.membership_post = async (req, res, next) => {
     }
   } else {
     res.render("profile", { title: "Profile Page", membererror: true });
+  }
+};
+
+exports.admin_post = async (req, res, next) => {
+  if (req.body.password === process.env.ADMIN_PASSWORD) {
+    try {
+      User.findOneAndUpdate(
+        { username: res.locals.currentUser.username },
+        { is_admin: true }
+      )
+        .then(() => res.redirect("/profile"))
+        .catch((err) => next(err));
+    } catch (err) {
+      return next(err);
+    }
   }
 };

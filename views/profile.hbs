@@ -9,6 +9,21 @@
     <h1>Welcome back, {{currentUser.username}}!</h1>
     {{#if currentUser.is_member}}
       <p>You are currently a member.</p>
+      {{#if currentUser.is_admin}}
+        <p>You have administrator privileges.</p>
+      {{else}}
+        <form method="POST" action="/admin">
+          <div class="form-item">
+            <label for="password">Admin Password</label>
+            <input type="password" name="password" id="password" required />
+          </div>
+          <div class="form-item">
+            <button>
+              Proceed
+            </button>
+          </div>
+        </form>
+      {{/if}}
     {{else}}
       <p>You are currently not a member.</p>
       <form method="POST" action="/membership">
@@ -24,5 +39,6 @@
         <p class="error">Incorrect password.</p>
       {{/if}}
     {{/if}}
+
   </body>
 </html>

@@ -28,4 +28,8 @@ router.get("/profile", profile_controller.profile_get);
 
 router.post("/membership", profile_controller.membership_post);
 
+router.post("/admin", profile_controller.admin_post);
+
+router.post("/delete", index_controller.delete_post);
+
 module.exports = router;
