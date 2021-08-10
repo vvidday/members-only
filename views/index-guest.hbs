@@ -1,22 +1,35 @@
-<h1>Welcome to Members Only!</h1>
-<div class="message-board">
-  {{#each messages}}
-    <div class="message">
-      <div class="message-title">
-        {{this.title}}
-      </div>
-      <div class="message-content">
-        <a href="/sign-up">Register</a>
-        or
-        <a href="/sign-in">Sign In</a>
-        to view the contents of this message.
-      </div>
-      <div class="message-timestamp">
-        {{this.timestamp}}
-      </div>
-      <div class="message-author">
-        Posted by: Anonymous
-      </div>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Welcome to Members Only!</h1>
+    <div class="message-board">
+      {{#each messages}}
+        <div class="message">
+          <div class="message-title center">
+            {{this.title}}
+          </div>
+          <div class="message-content">
+            <a href="/sign-up">Register</a>
+            or
+            <a href="/sign-in">Sign In</a>
+            to view the contents of this message.
+          </div>
+          <div class="container">
+
+            <div class="message-timestamp">
+              {{this.timestamp}}
+            </div>
+            <div class="message-author">
+              Posted by: Anonymous
+            </div>
+          </div>
+        </div>
+      {{/each}}
     </div>
-  {{/each}}
-</div>
+  </body>
+</html>

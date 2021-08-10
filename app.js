@@ -29,10 +29,7 @@ app.set("view engine", "hbs");
 //Passport
 passport.use(
   new LocalStrategy(async (username, password, done) => {
-    //    console.log("hey");
-    //   console.log(password);
     try {
-      console.log("hey");
       const user = await User.findOne({ username: username });
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
@@ -83,13 +80,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.post(
-  "/sign-in",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
-  })
-);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

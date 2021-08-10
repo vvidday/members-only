@@ -51,7 +51,7 @@ exports.signup_post = [
           });
           return newUser.save();
         })
-        .then(() => res.redirect("/"))
+        .then(() => res.redirect("/sign-in"))
         .catch((err) => next(err));
     }
   },

@@ -17,6 +17,9 @@
             <label for="password">Admin Password</label>
             <input type="password" name="password" id="password" required />
           </div>
+          {{#if adminerror}}
+            <p class="error">Incorrect password.</p>
+          {{/if}}
           <div class="form-item">
             <button>
               Proceed
@@ -31,13 +34,14 @@
           <label for="password">Member Password</label>
           <input type="password" name="password" id="password" required />
         </div>
+        {{#if membererror}}
+          <p class="error">Incorrect password.</p>
+        {{/if}}
+
         <div class="form-item">
           <button>Activate Membership</button>
         </div>
       </form>
-      {{#if membererror}}
-        <p class="error">Incorrect password.</p>
-      {{/if}}
     {{/if}}
 
   </body>

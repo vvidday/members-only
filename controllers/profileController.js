@@ -38,5 +38,7 @@ exports.admin_post = async (req, res, next) => {
     } catch (err) {
       return next(err);
     }
+  } else {
+    res.render("profile", { title: "Profile Page", adminerror: true });
   }
 };
